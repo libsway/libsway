@@ -1,5 +1,10 @@
 library rebase;
 
+pub enum RebaseError {
+    Overflow: (),
+    DivisionByZero: (),
+}
+
 pub struct Rebase {
     elastic: u64, 
     base: u64,
@@ -84,10 +89,12 @@ impl Rebase {
 use std::u128::U128;
 
 fn mul_div(a: u64, b: u64, c: u64) -> u64 {
+    require(c != 0, RebaseError::DivisionByZero);
     let a = U128{upper: 0, lower: a};
     let b = U128{upper: 0, lower: b};
     let c = U128{upper: 0, lower: c};
     let result = (a * b) / c;
+    require(result.upper == 0, RebaseError::Overflow);
 
     result.lower
 } 
