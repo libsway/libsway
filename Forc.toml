@@ -1,0 +1,7 @@
+[project]
+authors = ["ControlCplusControlV"]
+entry = "lib.sw"
+license = "GPLv2"
+name = "libsway"
+
+[dependencies]
